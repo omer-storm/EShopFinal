@@ -1,0 +1,26 @@
+/*html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}*/
+
+/*.adminpanelContainer {
+    padding: 50px;
+}*/
+.adminpanelContainer {
+    margin-left: 800px;
+    margin-top: 200px;
+}
