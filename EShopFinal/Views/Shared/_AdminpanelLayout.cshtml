@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EShopFinal</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sidebars.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    @*<link rel="stylesheet" href="~/EShopFinal.styles.css" asp-append-version="true" />*@
+</head>
+
+<body>
+    <main class="d-flex flex-nowrap">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+                <span class="fs-4">Adminpanel</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Banner" asp-action="Index">
+                        <i class="bi bi-fullscreen pe-none me-2"></i>
+                        Banners
+                     </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Product" asp-action="Index">
+                        <i class="bi bi-bag pe-none me-2"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Order" asp-action="Index">
+                        <i class="bi bi-card-text pe-none me-2"></i>
+                        Orders
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            
+        </div>
+
+        <div class="b-example-vr"></div>
+        
+        <div class="adminpanelContainer">
+          @RenderBody()
+        </div>
+
+    </main>
+    
+</body>
+
+</html>
+
