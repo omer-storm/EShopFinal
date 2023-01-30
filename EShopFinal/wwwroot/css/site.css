@@ -23,4 +23,8 @@ body {
 .adminpanelContainer {
     margin-left: 100px;
     margin-top: 100px;
+    width: 800px;
+    height: 100px;
 }
+
+

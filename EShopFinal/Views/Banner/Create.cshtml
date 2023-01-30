@@ -1,7 +1,35 @@
-﻿@{
+﻿@model Banner
+@{
     ViewBag.Title = "Create Banner";
     Layout = "~/Views/Shared/_AdminpanelLayout.cshtml";
 }
 
-<h1>Create Banner</h1>
+
+<form asp-action="Create" method="post">
+    <div class="p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2>Create New Banner:</h2>
+            </div>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Heading"></label>
+            <input asp-for="Heading" class="form-control" />
+            <span asp-validation-for="Heading" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <button class="btn btn-secondary" style="width:150px;">Create</button>
+        <a asp-controller="Banner" asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+</form>
 
