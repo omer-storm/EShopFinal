@@ -11,6 +11,10 @@ builder.Services.AddDbContext<ApplicationDBContext>(options
         )
 );
 
+builder.Services.AddMvc();
+
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,7 +26,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseSession();
+
+
 app.UseStaticFiles();
+
 
 app.UseRouting();
 

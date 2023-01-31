@@ -1,0 +1,50 @@
+﻿@model Product
+@{
+    ViewBag.Title = "Create Product";
+    Layout = "~/Views/Shared/_AdminpanelLayout.cshtml";
+}
+
+
+<form asp-action="Create" method="post">
+    <div class="p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2>Create New Product:</h2>
+            </div>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Heading"></label>
+            <input asp-for="Heading" class="form-control" />
+            <span asp-validation-for="Heading" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DisplayOrder"></label>
+            <input asp-for="DisplayOrder" class="form-control" />
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+        </div>
+        <button class="btn btn-secondary" style="width:150px;">Create</button>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>
+
