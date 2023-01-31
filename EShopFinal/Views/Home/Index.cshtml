@@ -4,42 +4,39 @@
 
 
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
+ 
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img class="bd-placeholder-img" width="100%" height="100%" src="https://media.wired.com/photos/5932d317aef9a462de984b8f/master/pass/hobbit_banner1.jpg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></img>
-            <div class="container">
-                <div class="carousel-caption text-start">
-                    <h1>Example headline.</h1>
-                    <p>Some representative placeholder content for the first slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img class="bd-placeholder-img" width="100%" height="100%" src="https://www.geekgirlauthority.com/wp-content/uploads/2017/05/GameofThronesCover.jpg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></img>
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
-                    <p>Some representative placeholder content for the second slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img class="bd-placeholder-img" width="100%" height="100%" src="https://cdn.wallpapersafari.com/4/55/stSVQd.jpg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></img>
+        
+        @{
+            int i = 0;
+        }
+        @foreach (var ban in Model)
+        {
+            @if(i == 0){
+                <div class="carousel-item active ">
+                    <img class="bd-placeholder-img" width="100%" height="100%" src=@ban.Url aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
             <div class="container">
                 <div class="carousel-caption text-end">
-                    <h1>One more for good measure.</h1>
-                    <p>Some representative placeholder content for the third slide of this carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                    <h1>@ban.Heading</h1>
+                    <p>@ban.Description</p>
                 </div>
             </div>
         </div>
+         }
+         else {
+             <div class="carousel-item">
+            <img class="bd-placeholder-img" width="100%" height="100%" src=@ban.Url aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+            <div class="container">
+                    <div class="carousel-caption text-end">
+                        <h1>@ban.Heading</h1>
+                        <p>@ban.Description</p>
+                    </div>
+            </div>
+        </div>
+
+         }
+            i++;
+        }
         
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -50,32 +47,11 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+    <div style="margin: 10px; display: flex; justify-content:center">
+        <a class="btn btn-dark btn-lg" asp-area="" asp-controller="Shop" asp-action="Index">
+            <h2>Shop Now !</h2>
+        </a>
+    </div>
 </div>
 
-<!-- Marketing messaging and featurettes
-================================================== -->
-<!-- Wrap the rest of the page in another container to center all the content. -->
 
-<div class="container marketing">
-
-    <!-- START THE FEATURETTES -->
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-            <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
-        </div>
-        <div class="col-md-5">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-        </div>
-    </div>
-
-
-
-    <hr class="featurette-divider">
-
-    <!-- /END THE FEATURETTES -->
-
-</div><!-- /.container -->

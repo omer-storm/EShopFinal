@@ -9,6 +9,10 @@ namespace EShopFinal.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Banner URL")]
+        public string Url { get; set; } = string.Empty;
+
+        [Required]
         [DisplayName("Banner Name")]
         public string Name { get; set; } = string.Empty;
 
@@ -19,6 +23,10 @@ namespace EShopFinal.Models
         [Required]
         [DisplayName("Banner Discription")]
         public string Description { get; set; } = string.Empty;
+
+        [Required]
+        [DisplayName("Display Order")]
+        public int DisplayOrder { get; set; } 
 
         [Required]
         public DateTime CreateDate { get; set; }

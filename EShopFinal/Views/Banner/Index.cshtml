@@ -5,4 +5,62 @@
 
 <h1>Banner</h1>
 
-<a class="btn btn-primary" asp-area="" asp-controller="Banner" asp-action="Create"> Create Banner</a>
+
+ 
+    <div class="col-6 text-end">
+        <a class="btn btn-primary" asp-area="" asp-controller="Banner" asp-action="Create">
+            <i class="bi bi-plus-circle"></i>
+            Create Banner
+        </a>
+    </div>
+    <br />
+   
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="row">
+                    Name
+                </th>
+                <th scope="row">
+                    Heading
+                </th>
+                <th scope="row">
+                    Description
+                </th>
+                <th scope="row">
+                    Url
+                </th>
+                <th scope="row">
+                    Display Order
+                </th>
+ 
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ban in Model)
+            {
+                <tr>
+                    <td>@ban.Name</td>
+                    <td>@ban.Heading</td>
+                    <td>@ban.Description</td>
+                    <td>
+                    <img width=400 height=200 src=@ban.Url aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                    </td>
+                    <td>@ban.DisplayOrder</td>
+                    <td>
+                        <a class="btn btn-primary mb-2" asp-action="Edit" asp-controller="Banner" asp-route-id="@ban.Id">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a class="btn btn-primary mb-2" asp-action="Delete" asp-controller="Banner" asp-route-id="@ban.Id">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+

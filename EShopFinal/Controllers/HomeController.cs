@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using EShopFinal.Models;
+using EShopMVCDotNetCore.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EShopFinal.Controllers
@@ -7,15 +8,20 @@ namespace EShopFinal.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        ApplicationDBContext db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDBContext _db, ILogger<HomeController> logger)
         {
             _logger = logger;
+            db = _db;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var Banners = db.Banner.Select(x => x)
+                .OrderBy(x => x.DisplayOrder)
+                .ToList();
+            return View(Banners);
         }
 
         public IActionResult Privacy()
