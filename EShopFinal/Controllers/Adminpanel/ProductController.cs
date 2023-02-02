@@ -1,5 +1,7 @@
-﻿using EShopFinal.Models;
+﻿using System.Data;
+using EShopFinal.Models;
 using EShopMVCDotNetCore.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EShopFinal.Controllers.Adminpanel
@@ -14,6 +16,7 @@ namespace EShopFinal.Controllers.Adminpanel
         
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("Adminpanel/Product/")]
         public IActionResult Index()
         {

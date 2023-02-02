@@ -11,6 +11,10 @@ namespace EShopMVCDotNetCore.Data
 
         public DbSet<Banner> Banner { get; set; }
         public DbSet<Product> Product { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
+
+
 
     }
 }

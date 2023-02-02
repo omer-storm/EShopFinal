@@ -1,4 +1,5 @@
-﻿<!-- Credit card form -->
+﻿@model Order
+
 <section style="margin-left: 200px; margin-top: 20px">
     <div class="row">
         <div class="col-md-10 mb-4">
@@ -7,44 +8,52 @@
                     <h5 class="mb-0">Biling details</h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <div asp-validation-summary="All"></div>
+                    <form asp-controller="Shop" asp-action="Purchase" method="post">
                         <!-- 2 column grid layout with text inputs for the first and last names -->
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-outline">
-                                    <input type="text" id="form6Example1" class="form-control" />
-                                    <label class="form-label" for="form6Example1">First name</label>
+                                    <label asp-for="FirstName" class="form-label"></label>
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-outline">
-                                    <input type="text" id="form6Example2" class="form-control" />
-                                    <label class="form-label" for="form6Example2">Last name</label>
+                                    <label asp-for="LastName" class="form-label"></label>
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Text input -->
                         <div class="form-outline mb-4">
-                            <input type="text" id="form6Example4" class="form-control" />
-                            <label class="form-label" for="form6Example4">Address</label>
+                            <label asp-for="Address" class="form-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="form6Example5" class="form-control" />
-                            <label class="form-label" for="form6Example5">Email</label>
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
-                        <!-- Number input -->
                         <div class="form-outline mb-4">
-                            <input type="number" id="form6Example6" class="form-control" />
-                            <label class="form-label" for="form6Example6">Phone</label>
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
+
+                        <input asp-for="Status" type="hidden" value="recieved" />
+
 
                         <hr class="my-4" />
 
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">
+                        <button class="btn btn-primary btn-lg btn-block">
                             Purchase
                         </button>
                     </form>

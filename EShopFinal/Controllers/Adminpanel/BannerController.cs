@@ -1,5 +1,7 @@
-﻿using EShopFinal.Models;
+﻿using System.Data;
+using EShopFinal.Models;
 using EShopMVCDotNetCore.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EShopFinal.Controllers.Adminpanel
@@ -13,6 +15,8 @@ namespace EShopFinal.Controllers.Adminpanel
             db = _db;
         }
 
+        [Authorize(Roles = "Admin")]
+
         [Route("Adminpanel/Banner/")]
         public IActionResult Index()
         {
@@ -22,13 +26,13 @@ namespace EShopFinal.Controllers.Adminpanel
             return View(Banners);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("Adminpanel/Banner/Create/")]
         public IActionResult Create()
         {
             return View();
         }
-
 
         [HttpPost]
         [Route("Adminpanel/Banner/Create/")]
@@ -47,6 +51,7 @@ namespace EShopFinal.Controllers.Adminpanel
             return View(banner);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Edit(int? Id)
         {
@@ -78,7 +83,7 @@ namespace EShopFinal.Controllers.Adminpanel
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("Adminpanel/Banner/Delete/")]
         public IActionResult Delete(int? Id)

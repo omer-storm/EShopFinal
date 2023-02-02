@@ -1,4 +1,6 @@
-﻿using EShopFinal.Models;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using EShopFinal.Models;
 using EShopMVCDotNetCore.Data;
 using EShopMVCDotNetCore.Helper;
 using Microsoft.AspNetCore.Mvc;
@@ -39,31 +41,41 @@ namespace EShopFinal.Controllers
             return View(Products);
         }
 
+
+
         [HttpGet]
-        public IActionResult Cart(int Id)
+        public IActionResult Cart(int? Id)
         {
-            var product = db.Product.Where(p => p.Id == Id).FirstOrDefault();
-
-
-            List<CartItem> list = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
-
-            if (list != null)
+            if (SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart") == null)
             {
-
-                if (!list.Any(i => i.Product.Id == Id))
-                    list.Add(new CartItem { Product = product, Quantity = 1 });
-                else
-                {
-                    var ExistingItem = list.Where(i => i.Product.Id == Id).First();
-                    ExistingItem.Quantity++;
-                }
-
+                return RedirectToAction("Index");
             }
-            else
-                list.Add(new CartItem { Product = product, Quantity = 1 });
+
+                List<CartItem> list = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
+
+            if (Id != null)
+            {
+                var product = db.Product.Where(p => p.Id == Id).FirstOrDefault();
+
+                if (list != null)
+                {
+
+                    if (!list.Any(i => i.Product.Id == Id))
+                        list.Add(new CartItem { Product = product, Quantity = 1 });
+                    else
+                    {
+                        var ExistingItem = list.Where(i => i.Product.Id == Id).First();
+                        ExistingItem.Quantity++;
+                    }
+
+                }
+                else
+                    list.Add(new CartItem { Product = product, Quantity = 1 });
 
 
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", list);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", list);
+            }
+
 
             ViewBag.CartItems = list;
 
@@ -73,7 +85,67 @@ namespace EShopFinal.Controllers
         [HttpGet]
         public IActionResult Purchase()
         {
+            List<CartItem> list = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
+
+            if (list.Any())
+            {
+
+                return View();
+            }
+            else return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Purchase(Order order)
+        {
+            List<CartItem> list = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
+
+            if (ModelState.IsValid)
+            {
+                db.Order.Add(order);
+
+                db.SaveChanges();
+
+                foreach (var item in list)
+                {
+                    db.CartItem.Add(new Models.CartItem { ProductId = item.Product.Id, OrderId = order.Id, Quantity = item.Quantity });
+                }
+
+                db.SaveChanges();
+
+
+                HttpContext.Session.Remove("cart");
+
+
+                return RedirectToAction("Index", "Home");
+            }
             return View();
+
+        }
+
+
+        public IActionResult RemoveFromCart(int Id)
+        {
+            List<CartItem> list = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
+            int index = FindIndex(Id);
+            list.RemoveAt(index);
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", list);
+            return RedirectToAction("Cart");
+
+        }
+
+        private int FindIndex(int id)
+        {
+            List<CartItem> cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
+            int i = 0;
+            foreach (var item in cart)
+            {
+                if (item.Product.Id == id)
+                    return i;
+                i = i + 1;
+            }
+            return -1;
         }
     }
 }
+

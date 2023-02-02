@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminpanelLayout.cshtml";
+}
+
+<h1>Order Items</h1>
+
+<br />
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="row">
+                Name
+            </th>
+            <th scope="row">
+                Heading
+            </th>
+            <th scope="row">
+                Description
+            </th>
+            <th scope="row">
+                Url
+            </th>
+            <th scope="row">
+                Display Order
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Cart in Model)
+        {
+            <tr>
+                <td>@Cart.Product.Name</td>
+                <td>@Cart.Product.Heading</td>
+                <td>@Cart.Product.Description</td>
+                <td>
+                    <img width=200 height=200 src=@Cart.Product.ImageUrl aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false" />
+                </td>
+                <td>@Cart.Product.DisplayOrder</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+

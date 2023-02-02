@@ -1,8 +1,15 @@
+using Auth0.AspNetCore.Authentication;
 using EShopMVCDotNetCore.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddAuth0WebAppAuthentication(options =>
+{
+    options.Domain = builder.Configuration["Auth0:Domain"];
+    options.ClientId = builder.Configuration["Auth0:ClientID"];
+    options.Scope = "openid profile email";
+}
+    );
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDBContext>(options
@@ -34,7 +41,7 @@ app.UseStaticFiles();
 
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
